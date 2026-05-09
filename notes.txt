@@ -146,7 +146,7 @@ STEP 15 - Jalankan Project
 =================== PART 3 - Delete Movie ===================
 STEP 16 - Tambahkan deleteMovie()
 Buka src/features/watchlist/hooks/use-movies.ts
-- filter()
+- filter() -> array baru
 ambil semua movie KECUALI movie yang id nya sama (id movie ingin dihapus)
 
 STEP 17 - Return deleteMovie
@@ -175,3 +175,27 @@ setMovies(...)
 
 STEP 15 - Jalankan Project
 > npm run dev
+
+
+=================== PART 4 - Toggle Watched ===================
+STEP 21 — Tambahkan toggleWatched()
+Buka src/features/watchlist/hooks/use-movies.ts
+Tambahkan toggleWatched()
+- currentMovies.map(...) -> update item dalam array
+
+STEP 22 — Return toggleWatched
+Buka src/features/watchlist/hooks/use-movies.ts
+Tambahkan:
+toggleWatched,
+
+STEP 23 — Ambil Di component
+Buka src\features\watchlist\components\movie-list.tsx
+Ubah menjadi const { movies, loading, addMovie, deleteMovie, toggleWatched } = useMovies();
+
+STEP 24 — Tambahkan Button 
+Buka src\features\watchlist\components\movie-list.tsx
+Tambahkan :
+<button onClick={() => toggleWatched(movie.id)}>
+  {movie.watched ? "Watched" : "Unwatched"}
+</button>
+Ubah style title movie untuk membedakan flag sudah ditonton

@@ -45,10 +45,24 @@ export function useMovies() {
     );
   }
 
+  function toggleWatched(id: number) {
+    setMovies((currentMovies) =>
+      currentMovies.map((movie) =>
+        movie.id === id
+          ? {
+              ...movie,
+              watched: !movie.watched,
+            }
+          : movie
+      )
+    );
+  }
+
   return {
     movies,
     loading,
     addMovie,
     deleteMovie,
+    toggleWatched,
   };
 }
