@@ -1,0 +1,86 @@
+STRUKTUR PROJECT
+movie-watchlist/
+├── node_modules/
+├── public/             image, icon, static assets
+├── src/                Tempat semua source code React
+│   └── app/            routing system Next.js
+|      └── page.tsx     code pertama yang dirender saat buka localhost:3000
+├── package.json
+├── tsconfig.json
+├── next.config.ts
+
+STEP 1 : setup project
+> npx create-next-app@latest movie-watchlist
+√ Would you like to use the recommended Next.js defaults? » No, customize settings
+√ Would you like to use TypeScript? ... No / Yes
+√ Which linter would you like to use? » ESLint
+√ Would you like to use React Compiler? ... No / Yes
+√ Would you like to use Tailwind CSS? ... No / Yes
+√ Would you like your code inside a `src/` directory? ... No / Yes
+√ Would you like to use App Router? (recommended) ... No / Yes
+√ Would you like to customize the import alias (`@/*` by default)? ... No / Yes
+√ Would you like to include AGENTS.md to guide coding agents to write up-to-date Next.js code? ... No / Yes
+
+=================== PART 1 - bagaimana frontend mengambil data ===================
+
+STEP 2 - Hapus Template Next.js (src/app/page.tsx)
+export default function HomePage() {
+  return (
+    <main>
+      <h1>Movie Watchlist</h1>
+    </main>
+  );
+}
+- HomePage() -> react component
+component adalah potongan ui yang reusable
+- return () -> isi tampilan yang akan muncul
+
+STEP 3 - Jalankan Project
+> npm run dev
+
+STEP 4 - Foldering project
+src/
+├── app/            page, route
+├── features/       fitur aplikasi : watchlist, auth, profile
+├── hooks/          reusable logic
+├── lib/            helper, API utility, shared function
+├── types/          TypeScript types
+
+STEP 5 - Buat Feature pertama
+src/features/watchlist
+
+STEP 6 - Buat Type movie
+src/features/watchlist/types/movie.ts
+- Movie -> TypeScript Interface
+interface digunakan untuk mendefinisikan bentuk data
+
+STEP 7 - Buat API Service
+src/features/watchlist/services/movie-api.ts
+- movieApi -> API Service Layer
+layer ini digunakan untuk komunikasi backend, fetch data, handle HTTP request
+
+STEP 8 - Buat custom hook 
+src/features/watchlist/hooks/use-movies.ts
+- useMovies
+semua React hook diawali kata use
+Tujuan Hook adalah memisahkan logic dari UI
+- const [movies, setMovies] 
+untuk menyimpan data movie
+- const [loading, setLoading]
+untuk mengetahui masih loading atau sudah selesai
+- useEffect(() => {})
+jalankan sesuatu setelah component render
+- [] -> dependency Array
+artinya hanya dijalankan sekali
+
+STEP 9 - Buat component UI
+src/features/watchlist/components/movie-list.tsx
+component ini tidak fetch langsung melainkan pakai hook
+
+STEP 10 - Hubungkan ke page (src/app/page.tsx)
+Tambahkan :
+import { MovieList } from "@/features/watchlist/components/movie-list";
+<MovieList />
+
+STEP 11 - Jalankan Project
+> npm run dev
