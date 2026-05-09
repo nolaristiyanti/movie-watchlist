@@ -39,9 +39,16 @@ export function useMovies() {
     setMovies((currentMovies) => [newMovie, ...currentMovies]);
   }
 
+  function deleteMovie(id: number) {
+    setMovies((currentMovies) =>
+      currentMovies.filter((movie) => movie.id !== id)
+    );
+  }
+
   return {
     movies,
     loading,
     addMovie,
+    deleteMovie,
   };
 }

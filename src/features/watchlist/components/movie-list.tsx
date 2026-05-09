@@ -4,7 +4,7 @@ import { useMovies } from "../hooks/use-movie";
 import { MovieForm } from "./movie-form";
 
 export function MovieList() {
-  const { movies, loading, addMovie } = useMovies();
+  const { movies, loading, addMovie, deleteMovie } = useMovies();
 
   if (loading) {
     return <p>Loading movies...</p>;
@@ -19,6 +19,10 @@ export function MovieList() {
           <div key={movie.id}>
             <h3>{movie.title}</h3>
             <p>Rating: {movie.personalRating}/10</p>
+
+            <button onClick={() => deleteMovie(movie.id)}>
+              Delete
+            </button>
           </div>
         ))}
       </div>

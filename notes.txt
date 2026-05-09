@@ -142,3 +142,36 @@ update state dan render UI ulang, movie baru muncul
 
 STEP 15 - Jalankan Project
 > npm run dev
+
+=================== PART 3 - Delete Movie ===================
+STEP 16 - Tambahkan deleteMovie()
+Buka src/features/watchlist/hooks/use-movies.ts
+- filter()
+ambil semua movie KECUALI movie yang id nya sama (id movie ingin dihapus)
+
+STEP 17 - Return deleteMovie
+Buka src/features/watchlist/hooks/use-movies.ts
+Tambahkan :
+deleteMovie,
+
+STEP 18 - Ambil deleteMovie di component
+Buka src\features\watchlist\components\movie-list.tsx
+ubah menjadi const { movies, loading, addMovie, deleteMovie } = useMovies();
+
+STEP 19 - Tambahkan Button delete 
+Buka src\features\watchlist\components\movie-list.tsx
+Tambahkan :
+<button onClick={() => deleteMovie(movie.id)}>
+  Delete
+</button>
+
+-----------------------------------------------------
+- src\features\watchlist\components\movie-list.tsx
+onClick={() => deleteMovie(movie.id)}
+- src/features/watchlist/hooks/use-movies.ts
+deleteMovie(movie.id)
+setMovies(...)
+--------------------------------------------------------
+
+STEP 15 - Jalankan Project
+> npm run dev
