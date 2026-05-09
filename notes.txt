@@ -79,8 +79,66 @@ component ini tidak fetch langsung melainkan pakai hook
 
 STEP 10 - Hubungkan ke page (src/app/page.tsx)
 Tambahkan :
-import { MovieList } from "@/features/watchlist/components/movie-list";
 <MovieList />
 
 STEP 11 - Jalankan Project
+> npm run dev
+
+=================== PART 2 - Form + State Flow React ===================
+Di React: UI mengikuti state
+User mengetik
+    ↓
+State berubah
+    ↓
+React re-render
+    ↓
+UI ikut berubah
+
+STEP 12 - Tambahkan create movie
+Buka src/features/watchlist/hooks/use-movies.ts
+Tambahkan function addMovie
+- setMovies((currentMovies) => ...)
+ambil state lama lalu update
+
+STEP 13 - Buat Movie Form 
+src/features/watchlist/components/movie-form.tsx
+- MovieFormProps adalah props
+props = data yang dikirim dari parent (MovieList) ke child (MovieForm)
+
+STEP 14 - Hubungkan MovieForm ke MovieList
+Buka src/features/watchlist/components/movie-list.tsx
+Tambahkan :
+<MovieForm onAddMovie={addMovie} />
+
+----------------------------------------------------
+src\features\watchlist\components\movie-list.tsx
+- const { movies, loading, addMovie } = useMovies();
+MovieList memanggil hook useMovies()
+
+src\features\watchlist\hooks\use-movie.ts
+- useMovies()
+addMovie didefinisikan sebagai function
+hook useMovies() return addMovie()
+
+src\features\watchlist\components\movie-list.tsx
+- const { movies, loading, addMovie } = useMovies();
+Sekarang MovieList punya function addMovie
+- <MovieForm onAddMovie={addMovie} />
+prop onAddMovie = function onAddMovie
+
+src\features\watchlist\components\movie-form.tsx
+- export function MovieForm({ onAddMovie }: MovieFormProps)
+ambil prop onAddMovie (sama saja dengan function addMovie)
+- onAddMovie({
+    title,
+    personalRating: rating,
+  });
+karena onAddMovie === addMovie, maka jalankan function addMovie() pada hook / useMovies()
+
+src\features\watchlist\components\movie-list.tsx
+- setMovies((currentMovies) => [newMovie, ...currentMovies]);
+update state dan render UI ulang, movie baru muncul
+----------------------------------------------------
+
+STEP 15 - Jalankan Project
 > npm run dev
