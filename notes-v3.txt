@@ -1,0 +1,22 @@
+-------------------------- PART 1 - fetch course outline --------------------------
+STEP 1 — BUAT FEATURE BARU
+Buat src/features/courses
+src/
+├── features/
+│   └── courses/
+│       ├── components/
+│       ├── hooks/
+│       ├── services/
+│       ├── types/
+│       └── context/
+
+STEP 2 — BUAT TYPE
+Buat src/features/courses/types/course.ts
+Sebagai backend contract
+
+STEP 3 — BUAT SERVICE
+Buat src/features/courses/services/course-api.ts
+Fake backend sementara
+
+STEP 4 — BUAT ASYNC HOOK
+Buat src/features/courses/hooks/use-course.ts
