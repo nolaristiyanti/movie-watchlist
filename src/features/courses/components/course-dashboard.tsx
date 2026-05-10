@@ -1,6 +1,7 @@
 "use client";
 
 import { useCourse } from "../hooks/use-course";
+import { CourseNotes } from "./course-notes";
 
 export function CourseDashboard() {
     // panggil custom hook untuk ambil data course
@@ -40,6 +41,8 @@ export function CourseDashboard() {
                             <p>
                                 {topic.summary}
                             </p>
+
+                            <CourseNotes topicId={topic.id} />
                         </div>
                     )
                 )}

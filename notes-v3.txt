@@ -49,3 +49,13 @@ Buat src/features/courses/hooks/use-course-notes.ts
 -------------------------- PART 4 - async mutation hook --------------------------
 STEP 11 — ISI use-course-notes.ts
 Buka src/features/courses/hooks/use-course-notes.ts
+
+-------------------------- PART 5 - UI --------------------------
+STEP 12 — BUAT COMPONENT NOTE
+Buat src/features/courses/components/course-notes.tsx
+
+STEP 13 — TAMPILKAN NOTES
+Buka src\features\courses\components\course-dashboard.tsx
+Tambahkan :
+import { CourseNotes } from "./course-notes";
+<CourseNotes topicId={topic.id} />
