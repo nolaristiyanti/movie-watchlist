@@ -45,3 +45,7 @@ Sementara sebagai fake backend memory
 
 STEP 10 — BUAT ASYNC HOOK
 Buat src/features/courses/hooks/use-course-notes.ts
+
+-------------------------- PART 4 - async mutation hook --------------------------
+STEP 11 — ISI use-course-notes.ts
+Buka src/features/courses/hooks/use-course-notes.ts

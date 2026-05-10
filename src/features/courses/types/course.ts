@@ -9,3 +9,10 @@ export type Course = {
   description: string;
   topics: CourseTopic[];
 };
+
+export type CourseNote = {
+  id: number;
+  topicId: string;
+  title: string;
+  body: string;
+};

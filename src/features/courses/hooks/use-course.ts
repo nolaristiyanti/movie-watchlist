@@ -36,23 +36,23 @@ export function useCourse() {
         // fungsi untuk ambil data course
         async function loadCourse() {
             try {
-            const data =
-                await courseApi.getCourse();
+                const data =
+                    await courseApi.getCourse();
 
-            setState({
-                status: "success",
-                course: data,
-                error: null,
-            });
+                setState({
+                    status: "success",
+                    course: data,
+                    error: null,
+                });
             } catch (error) {
-            setState({
-                status: "error",
-                course: null,
-                error:
-                error instanceof Error
-                    ? error.message
-                    : "Failed to load course",
-            });
+                setState({
+                    status: "error",
+                    course: null,
+                    error:
+                    error instanceof Error
+                        ? error.message
+                        : "Failed to load course",
+                });
             }
         }
 
