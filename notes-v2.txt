@@ -27,3 +27,38 @@ STEP 6 - Jalankan Project -> movie masih hilang ketika refresh
 STEP 7 — UPDATE useEffect
 Buka src\features\watchlist\hooks\use-movie.ts
 
+Component render
+↓
+cek localStorage
+↓
+ambil data lama jika ada
+↓
+buat state React
+↓
+saat state berubah
+↓
+simpan lagi ke localStorage
+
+-------------------------- PART 2 - context API / shared global state --------------------------
+STEP 8 — BUAT FOLDER CONTEXT
+Buat src/features/watchlist/context
+
+STEP 9 — BUAT FILE CONTEXT
+Buat src/features/watchlist/context/movie-context.tsx
+
+STEP 10 — Isi Code file context 
+Buat src/features/watchlist/context/movie-context.tsx
+Context adalah tempat menyimpan shared state
+Provider adalah pembungkus yang membagikan data ke seluruh component di dalamnya
+
+- useMovieContext()
+digunakan untuk mengambil data dari context
+- const movieState = useMovies();
+artinya context memakai hook useMovies
+
+MovieProvider
+   ↓
+menyimpan movie state
+   ↓
+component di dalamnya
+bisa akses movie state
