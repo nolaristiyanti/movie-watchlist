@@ -2,9 +2,12 @@
 
 import { useMovies } from "../hooks/use-movie";
 import { MovieForm } from "./movie-form";
+import { useState } from "react";
 
 export function MovieList() {
-  const { movies, loading, addMovie, deleteMovie, toggleWatched } = useMovies();
+  const { movies, loading, addMovie, deleteMovie, toggleWatched, updateMovie, } = useMovies();
+  const [editingMovieId, setEditingMovieId] = useState<number | null>(null);
+  const editingMovie = movies.find((movie) => movie.id === editingMovieId);
 
   if (loading) {
     return <p>Loading movies...</p>;
@@ -12,7 +15,19 @@ export function MovieList() {
 
   return (
     <div>
-      <MovieForm onAddMovie={addMovie} />
+      {/* <MovieForm onAddMovie={addMovie} /> */}
+      <MovieForm
+        onAddMovie={(input) => {
+          if (editingMovieId) {
+            updateMovie(editingMovieId, input);
+            setEditingMovieId(null);
+          } else {
+            addMovie(input);
+          }
+        }}
+        initialData={editingMovie}
+        isEditing={!!editingMovieId}
+      />
 
       <div>
         {movies.map((movie) => (
@@ -28,6 +43,10 @@ export function MovieList() {
 
             <button onClick={() => toggleWatched(movie.id)}>
               {movie.watched ? "Watched" : "Unwatched"}
+            </button>
+
+            <button onClick={() => setEditingMovieId(movie.id)}>
+              Edit
             </button>
           </div>
         ))}

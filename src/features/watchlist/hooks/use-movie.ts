@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { movieApi } from "../services/movie-api";
 import { Movie } from "../types/movie";
+import { useLocalStorage } from "@/shared/hooks/use-local-storage";
 
 type CreateMovieInput = {
   title: string;
@@ -10,11 +11,19 @@ type CreateMovieInput = {
 };
 
 export function useMovies() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+  // const [movies, setMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useLocalStorage<Movie[]>("movies", []);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadMovies() {
+      // kalau localStorage sudah ada data
+      // tidak perlu fetch API lagi
+      if (movies.length > 0) {
+        setLoading(false);
+        return;
+      }
+
       try {
         const data = await movieApi.getMovies();
         setMovies(data);
@@ -58,11 +67,32 @@ export function useMovies() {
     );
   }
 
+  function updateMovie(
+    id: number,
+    input: {
+      title: string;
+      personalRating: number;
+    }
+  ) {
+    setMovies((currentMovies) =>
+      currentMovies.map((movie) =>
+        movie.id === id
+          ? {
+              ...movie,
+              title: input.title,
+              personalRating: input.personalRating,
+            }
+          : movie
+      )
+    );
+  }
+
   return {
     movies,
     loading,
     addMovie,
     deleteMovie,
     toggleWatched,
+    updateMovie,
   };
 }

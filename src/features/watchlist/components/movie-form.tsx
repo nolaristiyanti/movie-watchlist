@@ -1,17 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type MovieFormProps = {
   onAddMovie: (input: {
     title: string;
     personalRating: number;
   }) => void;
+
+  initialData?: {
+    title: string;
+    personalRating: number;
+  };
+
+  isEditing?: boolean;
 };
 
-export function MovieForm({ onAddMovie }: MovieFormProps) {
-  const [title, setTitle] = useState("");
-  const [rating, setRating] = useState(0);
+export function MovieForm({ onAddMovie, initialData, isEditing }: MovieFormProps) {
+  const [title, setTitle] = useState(
+    initialData?.title || ""
+  );
+
+  const [rating, setRating] = useState(
+    initialData?.personalRating || 0
+  );
+
+  // ketika klik edit pada parent  jalankan effect
+  // ketika klik Update Movie jalankan effect
+  useEffect(() => {
+    if (initialData) {
+      setTitle(initialData.title);
+      setRating(initialData.personalRating);
+    }
+  }, [initialData]);
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -45,7 +66,7 @@ export function MovieForm({ onAddMovie }: MovieFormProps) {
       </div>
 
       <button type="submit">
-        Add Movie
+        {isEditing ? "Update Movie" : "Add Movie"}
       </button>
     </form>
   );

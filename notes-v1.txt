@@ -199,3 +199,117 @@ Tambahkan :
   {movie.watched ? "Watched" : "Unwatched"}
 </button>
 Ubah style title movie untuk membedakan flag sudah ditonton
+
+=================== PART 4 - Edit Movie ===================
+STEP 25 — Tambahkan updateMovie()
+Buka src/features/watchlist/hooks/use-movies.ts
+Tambahkan :
+function updateMovie()
+return updateMovie,
+
+STEP 26 — Tambahkan editingMovieId
+untuk tahu movie mana yang sedang diedit
+Buka src\features\watchlist\components\movie-list.tsx
+Tambahkan :
+const [editingMovieId, setEditingMovieId] = useState<number | null>(null);
+
+STEP 27 — Cari Movie yang diedit 
+Tambahkan :
+const editingMovie = movies.find((movie) => movie.id === editingMovieId);
+
+STEP 28 — Update MovieFormProps
+Buka src\features\watchlist\components\movie-form.tsx
+ubah type menjadi :
+type MovieFormProps = {
+  onAddMovie: (input: {
+    title: string;
+    personalRating: number;
+  }) => void;
+
+  initialData?: {
+    title: string;
+    personalRating: number;
+  };
+
+  isEditing?: boolean;
+};
+
+STEP 29 — Update useState form
+Buka src\features\watchlist\components\movie-form.tsx
+ubah menjadi :
+const [title, setTitle] = useState(
+  initialData?.title || ""
+);
+
+const [rating, setRating] = useState(
+  initialData?.personalRating || 0
+);
+
+STEP 30 — Update parameter Component 
+Buka src\features\watchlist\components\movie-form.tsx
+ubah menjadi :
+export function MovieForm({ onAddMovie, initialData, isEditing }: MovieFormProps) {
+
+STEP 31 — Update button text
+Buka src\features\watchlist\components\movie-form.tsx
+ubah menjadi :
+{isEditing ? "Update Movie" : "Add Movie"}
+
+STEP 32 — Hubungkan ke movie-list.tsx
+Buka src\features\watchlist\components\movie-list.tsx
+ubah menjad :
+<MovieForm
+  onAddMovie={(input) => {
+    if (editingMovieId) {
+      updateMovie(editingMovieId, input);
+      setEditingMovieId(null);
+    } else {
+      addMovie(input);
+    }
+  }}
+  initialData={editingMovie}
+  isEditing={!!editingMovieId}
+/>
+
+STEP 33 — Tambahkan button edit 
+Buka src\features\watchlist\components\movie-list.tsx
+Tambahkan :
+<button onClick={() => setEditingMovieId(movie.id)}>
+  Edit
+</button>
+
+STEP 34 — Tambahkan useEffect
+Buka src\features\watchlist\components\movie-form.tsx
+Tambahkan 
+useEffect(() => {
+  if (initialData) {
+    setTitle(initialData.title);
+    setRating(initialData.personalRating);
+  }
+}, [initialData]);
+
+------------------------------
+Klik Edit (movie-list.tsx)
+   ↓
+editingMovieId berubah (movie-list.tsx)
+   ↓
+editingMovie ditemukan (movie-list.tsx)
+   ↓
+initialData dikirim ke form (movie-form.tsx)
+   ↓
+useEffect update state form (movie-form.tsx)
+   ↓
+input terisi (movie-form.tsx)
+   ↓
+submit (movie-list.tsx)
+   ↓
+updateMovie(5, data) (movie-form.tsx)
+   ↓
+movies state berubah / setEditingMovieId(null) (movie-form.tsx)
+   ↓
+React render ulang
+   ↓
+UI update
+
+
+
