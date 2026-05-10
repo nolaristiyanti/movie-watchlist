@@ -20,3 +20,7 @@ Fake backend sementara
 
 STEP 4 — BUAT ASYNC HOOK
 Buat src/features/courses/hooks/use-course.ts
+
+-------------------------- PART 2 - async hook architecture --------------------------
+STEP 5 — ISI use-course.ts
+Buka src/features/courses/hooks/use-course.ts
