@@ -24,3 +24,12 @@ Buat src/features/courses/hooks/use-course.ts
 -------------------------- PART 2 - async hook architecture --------------------------
 STEP 5 — ISI use-course.ts
 Buka src/features/courses/hooks/use-course.ts
+
+-------------------------- PART 3 - async UI rendering --------------------------
+STEP 6 — BUAT COMPONENT
+Buat src/features/courses/components/course-dashboard.tsx
+
+STEP 7 — TAMPILKAN PAGE
+Buat src/app/course/page.tsx
+
+Test : localhost:3000/course
