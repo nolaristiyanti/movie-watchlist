@@ -80,3 +80,28 @@ Buat src/features/watchlist/components/movie-stats.tsx
 
 STEP 14 — TAMPILKAN COMPONENT
 Buka src/app/page.tsx
+
+-------------------------- PART 4 - custom hook + context architecture --------------------------
+STEP 15 — BUAT FEATURE HOOK
+Buat src/features/watchlist/hooks/use-watchlist.ts
+sekarang component tidak perlu tahu context yang digunakan, cukup tahu useWatchlist()
+
+STEP 16 — UPDATE MovieList
+Buka : src\features\watchlist\components\movie-list.tsx
+Ganti :
+import { useWatchlist } from "../hooks/use-watchlist";
+
+STEP 17 — UPDATE MovieStats
+Buka : src\features\watchlist\components\movie-list.tsx
+Ganti :
+const { movies, loading, addMovie, deleteMovie, toggleWatched, updateMovie, } = useWatchlist();
+
+Component
+   ↓
+useWatchlist()
+   ↓
+useMovieContext()
+   ↓
+Context
+
+Sekarang component tidak tergantung implementation
