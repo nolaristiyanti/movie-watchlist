@@ -62,3 +62,14 @@ menyimpan movie state
    ↓
 component di dalamnya
 bisa akses movie state
+
+STEP 11 — BUNGKUS APP DENGAN PROVIDER
+Buka src/app/page.tsx
+<MovieProvider></MovieProvider>
+bagikan movie state ke semua component di dalamnya yaitu <MovieList />
+Jadi MovieList sekarang: bisa akses Context
+
+STEP 12 — GANTI useMovies MENJADI useMovieContext
+Buka : src\features\watchlist\components\movie-list.tsx
+const { movies, loading, addMovie, deleteMovie, toggleWatched, updateMovie, } = useMovieContext();
+MovieList mengambil state global dari Context

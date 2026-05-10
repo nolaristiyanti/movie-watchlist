@@ -1,11 +1,13 @@
 "use client";
 
-import { useMovies } from "../hooks/use-movie";
+// import { useMovies } from "../hooks/use-movie";
+import { useMovieContext } from "../context/movie-context";
 import { MovieForm } from "./movie-form";
 import { useState } from "react";
 
 export function MovieList() {
-  const { movies, loading, addMovie, deleteMovie, toggleWatched, updateMovie, } = useMovies();
+  // const { movies, loading, addMovie, deleteMovie, toggleWatched, updateMovie, } = useMovies();
+  const { movies, loading, addMovie, deleteMovie, toggleWatched, updateMovie, } = useMovieContext();
   const [editingMovieId, setEditingMovieId] = useState<number | null>(null);
   const editingMovie = movies.find((movie) => movie.id === editingMovieId);
 
