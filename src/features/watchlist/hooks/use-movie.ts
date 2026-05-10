@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { movieApi } from "../services/movie-api";
 import { Movie } from "../types/movie";
+// changed from useState to useLocalStorage
 import { useLocalStorage } from "@/shared/hooks/use-local-storage";
 
 type CreateMovieInput = {
@@ -11,12 +12,15 @@ type CreateMovieInput = {
 };
 
 export function useMovies() {
+  // changed from useState to useLocalStorage
   // const [movies, setMovies] = useState<Movie[]>([]);
   const [movies, setMovies] = useLocalStorage<Movie[]>("movies", []);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadMovies() {
+      // changed from useState to useLocalStorage
       // kalau localStorage sudah ada data
       // tidak perlu fetch API lagi
       if (movies.length > 0) {

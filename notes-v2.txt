@@ -1,0 +1,29 @@
+-------------------------- PART 1 - custom hook reusable --------------------------
+STEP 1 — Buat folder hook
+Buat src/shared/hooks
+
+STEP 2 — Buat file hook 
+Buat src/shared/hooks/use-local-storage.ts
+tujuan hook ini adalah walaupun refresh browser, state tetap ada
+
+STEP 3 — Adjust hook
+Buka src\features\watchlist\hooks\use-movie.ts
+Ganti useState() menjadi useLocalStorage()
+
+STEP 4 — IMPORT HOOK BARU
+Buka src\features\watchlist\hooks\use-movie.ts
+Tambahkan :
+import { useLocalStorage } from "@/shared/hooks/use-local-storage";
+
+STEP 5 — GANTI useState MOVIES
+Buka src\features\watchlist\hooks\use-movie.ts
+Ganti menjadi :
+const [movies, setMovies] = useLocalStorage<Movie[]>("movies", []);
+- browser akan menyimpan: localStorage["movies"]
+
+STEP 6 - Jalankan Project -> movie masih hilang ketika refresh
+> npm run dev
+
+STEP 7 — UPDATE useEffect
+Buka src\features\watchlist\hooks\use-movie.ts
+
