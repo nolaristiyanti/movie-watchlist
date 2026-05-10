@@ -33,3 +33,15 @@ STEP 7 — TAMPILKAN PAGE
 Buat src/app/course/page.tsx
 
 Test : localhost:3000/course
+
+-------------------------- PART 4 - async CRUD architecture --------------------------
+STEP 8 — TAMBAH TYPE NOTE
+Buka src/features/courses/types/course.ts
+Tambahkan CourseNote
+
+STEP 9 — BUAT SERVICE NOTE
+Buat src/features/courses/services/course-note-api.ts
+Sementara sebagai fake backend memory
+
+STEP 10 — BUAT ASYNC HOOK
+Buat src/features/courses/hooks/use-course-notes.ts
