@@ -9,11 +9,15 @@ type CourseNotesProps = {
 };
 
 export function CourseNotes({topicId,}: CourseNotesProps) {
-    const { notes, status, error, createNote, deleteNote, } = useCourseNotes(topicId);
+    // const { notes, status, error, createNote, deleteNote, } = useCourseNotes(topicId);
+    const { notes, status, error, createNote, updateNote, deleteNote, } = useCourseNotes(topicId);
 
     const [title, setTitle] = useState("");
 
     const [body, setBody] = useState("");
+
+    // state untuk simpan id note yang sedang diedit, null jika tidak ada
+    const [editingNoteId, setEditingNoteId] = useState<number | null>(null);
 
     async function handleSubmit(event: React.FormEvent) {
         event.preventDefault();
@@ -22,10 +26,26 @@ export function CourseNotes({topicId,}: CourseNotesProps) {
             return;
         }
 
-        await createNote({
-            title,
-            body,
-        });
+        // await createNote({
+        //     title,
+        //     body,
+        // });
+
+        if (editingNoteId) {
+            await updateNote(editingNoteId,
+            {
+                title,
+                body,
+            }
+            );
+
+            setEditingNoteId(null);
+        } else {
+            await createNote({
+                title,
+                body,
+            });
+        }
 
         setTitle("");
         setBody("");
@@ -67,24 +87,53 @@ export function CourseNotes({topicId,}: CourseNotesProps) {
                 </div>
 
                 <button type="submit" className="bg-green-500 text-white px-4 py-2">
-                    Add Note
+                    { editingNoteId ? "Update Note" : "Add Note" }
                 </button>
+
+                {
+                    editingNoteId && (
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setEditingNoteId(null);
+
+                                setTitle("");
+
+                                setBody("");
+                            }}
+                        >
+                            Cancel
+                        </button>
+                    )
+                }
             </form>
 
             <div>
                 {notes.map((note) => (
                     <div key={note.id}>
-                    <h3>{note.title}</h3>
+                        <h3>{note.title}</h3>
 
-                    <p>{note.body}</p>
+                        <p>{note.body}</p>
 
-                    <button
-                        onClick={() =>
-                        deleteNote(note.id)
-                        }
-                    >
-                        Delete
-                    </button>
+                        <button
+                            onClick={() => {
+                                setEditingNoteId(note.id);
+
+                                setTitle(note.title);
+
+                                setBody(note.body);
+                            }}
+                        >
+                        Edit
+                        </button>
+
+                        <button
+                            onClick={() =>
+                            deleteNote(note.id)
+                            }
+                        >
+                            Delete
+                        </button>
                     </div>
                 ))}
             </div>

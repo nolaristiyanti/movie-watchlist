@@ -59,3 +59,27 @@ Buka src\features\courses\components\course-dashboard.tsx
 Tambahkan :
 import { CourseNotes } from "./course-notes";
 <CourseNotes topicId={topic.id} />
+
+-------------------------- PART 5 - Edit Note Flow --------------------------
+STEP 14 — TAMBAH EDITING STATE
+Buka src/features/courses/components/course-notes.tsx
+Ganti :
+const { notes, status, error, createNote, updateNote, deleteNote, } = useCourseNotes(topicId);
+Tambahkan :
+const [editingNoteId, setEditingNoteId] = useState<number | null>(null);
+
+STEP 15 — UBAH handleSubmit
+Buka src/features/courses/components/course-notes.tsx
+Adjust handleSubmit
+
+STEP 16 — TAMBAH BUTTON EDIT
+Buka src/features/courses/components/course-notes.tsx
+Tambahkan button edit
+
+STEP 17 — UBAH TEXT BUTTON
+Buka src/features/courses/components/course-notes.tsx
+Adjust label button
+
+STEP 18 — TAMBAH BUTTON CANCEL
+Buka src/features/courses/components/course-notes.tsx
+Tambahkan button cancel
