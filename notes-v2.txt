@@ -73,3 +73,10 @@ STEP 12 — GANTI useMovies MENJADI useMovieContext
 Buka : src\features\watchlist\components\movie-list.tsx
 const { movies, loading, addMovie, deleteMovie, toggleWatched, updateMovie, } = useMovieContext();
 MovieList mengambil state global dari Context
+
+-------------------------- PART 3 - buat MovieStats --------------------------
+STEP 13 — BUAT COMPONENT BARU
+Buat src/features/watchlist/components/movie-stats.tsx
+
+STEP 14 — TAMPILKAN COMPONENT
+Buka src/app/page.tsx
